@@ -5,10 +5,16 @@ from simple_history.models import HistoricalRecords
 
 
 class Listing(models.Model):
+    STATUS_CHOICES = [
+        ('new', 'New'),
+        ('ongoing', 'Ongoing'),
+        ('finished', 'Finished'),
+    ]
+
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     user = models.ForeignKey(User, blank=True, on_delete=models.DO_NOTHING)
-    status = models.CharField(max_length=10, default='new')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='new')
     list_date = models.DateTimeField(default=datetime.now, blank=True)
 
     history = HistoricalRecords()

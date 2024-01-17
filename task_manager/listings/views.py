@@ -1,8 +1,13 @@
 from django.shortcuts import render
+from .models import Listing
 
 
 def index(request):
-    return render(request, 'listings/logged_home.html')
+    listings = Listing.objects.all()
+    context = {
+        'listings': listings
+    }
+    return render(request, 'listings/logged_home.html', context)
 
 
 def listing(request):
