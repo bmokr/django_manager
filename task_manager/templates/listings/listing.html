@@ -4,9 +4,7 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4">45 Drivewood Circle</h1>
-          <p class="lead">
-            <i class="fas fa-map-marker"></i> Norwood MA, 02062</p>
+          <h1 class="display-4">{{ listing.title }}</h1>
         </div>
       </div>
     </div>
@@ -18,12 +16,10 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="index.html">Home</a>
+            <!-- if login -->
+            <a href="{% url 'index' %}">Home</a>
           </li>
-          <li class="breadcrumb-item">
-            <a href="listings.html">Tasks</a>
-          </li>
-          <li class="breadcrumb-item active">42 Drivewood Circle</li>
+          <li class="breadcrumb-item active">{{ listing.title }}</li>
         </ol>
       </nav>
     </div>
@@ -32,7 +28,6 @@
   <!-- Listing -->
   <section id="listing" class="py-4">
     <div class="container">
-      <a href="listings.html" class="btn btn-light mb-4">Back To Tasks</a>
       <div class="row">
         <div class="col-md-9">
           <!-- Fields -->
@@ -40,46 +35,22 @@
             <div class="col-md-6">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-money-bill-alt"></i> Asking Price:
-                  <span class="float-right">$490,000</span>
+                  <i class="fas fa-bookmark text-secondary"></i> ID:
+                  <span class="float-right">{{ listing.id }}</span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-bed"></i> Bedrooms:
-                  <span class="float-right">3</span>
+                  <i class="fas fa-user"></i> Assigned to:
+                  <span class="float-right">{{ listing.user }}</span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-bath"></i> Bathrooms:
-                  <span class="float-right">2</span>
+                  <i class="fas fa-spinner"></i> Status:
+                  <span class="float-right">{{ listing.status }}</span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-car"></i> Garage:
-                  <span class="float-right">2
+                  <i class="fas fa-clock"></i> Listing date:
+                  <span class="float-right">{{ listing.list_date }}
                   </span>
                 </li>
-              </ul>
-            </div>
-            <div class="col-md-6">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-th-large"></i> Square Feet:
-                  <span class="float-right">3200</span>
-                </li>
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-square"></i> Lot Size:
-                  <span class="float-right">2.5 Acres
-                  </span>
-                </li>
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-calendar"></i> Listing Date:
-                  <span class="float-right">8/30/2018</span>
-                </li>
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-bed"></i> Realtor:
-                  <span class="float-right">Kyle Brown
-                  </span>
-                </li>
-
-
               </ul>
             </div>
           </div>
@@ -87,9 +58,7 @@
           <!-- Description -->
           <div class="row mb-5">
             <div class="col-md-12">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia recusandae esse reiciendis officia omnis non rerum dicta
-              cupiditate nostrum molestias deserunt aut minus inventore animi atque, consequuntur ad fugit. Possimus culpa
-              blanditiis repellendus ipsa similique ullam, natus error dolor harum.
+              {{ listing.description }}
             </div>
           </div>
         </div>

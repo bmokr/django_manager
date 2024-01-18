@@ -58,21 +58,25 @@
           <div class="card listing-preview">
             <div class="card-body">
               <div class="listing-heading text-center">
-                <h4 class="text-primary">Title</h4>
+                <h4 class="text-primary">{{ listing.title }}</h4>
                 <p>
-                  <i class="fas fa-bookmark text-secondary"></i> id</p>
+                  <i class="fas fa-bookmark text-secondary"></i>{{ listing.id }}</p>
               </div>
               <hr>
               <div class="row py-2 text-secondary">
                 <div class="col-6">
-                  <i class="fas fa-user"></i> Kyle Brown</div>
+                  <i class="fas fa-user"></i> {{ listing.user }}</div>
               </div>
               <div class="row text-secondary pb-2">
                 <div class="col-6">
-                  <i class="fas fa-clock"></i> 5 days ago</div>
+                  <i class="fas fa-spinner"></i> {{ listing.status }}</div>
+              </div>
+              <div class="row text-secondary pb-2">
+                <div class="col-6">
+                  <i class="fas fa-clock"></i> {{ listing.list_date }}</div>
               </div>
               <hr>
-              <a href="listing.html" class="btn btn-primary btn-block">More Info</a>
+              <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
             </div>
           </div>
         </div>

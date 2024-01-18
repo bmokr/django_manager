@@ -1,0 +1,69 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+
+{% block title %}
+    History of changes for: {{ listing.title }}
+{% endblock %}
+
+{% block branding %}
+    <h1 id="head">
+        <img src="{% static 'img/logo.png' %}" alt="mng" height="50" width="50" class="brand_img">  Admin Area
+    </h1>
+{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>History of changes for: {{ listing.title }}</h1>
+
+    <form method="get" action="">
+        <label for="sort_by">Sort by:</label>
+        <select id="sort_by" name="sort_by">
+            <option value="history_date">Date</option>
+            <option value="history_user">Author</option>
+            <option value="type">Type</option>
+        </select>
+
+        <label for="filter_user">Filter by user:</label>
+        <select id="filter_user" name="filter_user">
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Apply</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>History ID</th>
+                <th>Date</th>
+                <th>Change Type</th>
+                <th>Changed Fields</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for change in changes %}
+                <tr>
+                    <td>{{ change.0 }}</td>
+                    <td>{{ change.1 }}</td>
+                    <td>{{ change.3 }}</td>
+                    <td>
+                        <ul>
+                            {% for field_change in change.4 %}
+                                <li>{{ field_change.0 }}: {{ field_change.1 }} → {{ field_change.2 }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ change.2 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ previous_page }}">Back</a>
+{% endblock %}
