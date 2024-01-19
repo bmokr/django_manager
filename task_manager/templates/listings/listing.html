@@ -17,7 +17,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <!-- if login -->
-            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'logged_home' %}">Home</a>
           </li>
           <li class="breadcrumb-item active">{{ listing.title }}</li>
         </ol>
@@ -83,7 +83,7 @@
           <form>
             <div class="form-group">
               <label for="property_name" class="col-form-label">Task:</label>
-              <input type="text" name="listing" class="form-control" value="45 Drivewood Cirlce" disabled>
+              <input type="text" name="listing" class="form-control" value="{{ listing.title }}" disabled>
             </div>
             <!-- <div class="form-group">
               <label for="name" class="col-form-label">Status:</label>

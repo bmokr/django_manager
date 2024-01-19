@@ -1,22 +1,38 @@
-from audioop import reverse
-
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from .models import Listing
 from .utils import pair_iterable_for_delta_changes
 from operator import itemgetter
+from django.contrib.auth.models import User
 
-# from django.core.paginator import Paginator
 
-
-def index(request):
+def logged_home(request):
     listings = Listing.objects.order_by('-list_date')
 
-    # paginator = Paginator(listings, 6)
-    # page = request.GET.get('page')
-    # paged_listings = paginator.get_page(page)
+    users = User.objects.all()
+
+    # Keywords
+    if 'keywords' in request.GET:
+        keywords = request.GET['keywords']
+        if keywords:
+            listings = listings.filter(description__icontains=keywords)
+
+    # User
+    if 'user' in request.GET:
+        user = request.GET['user']
+        print(user)
+        if user:
+            listings = listings.filter(user__exact=user)
+
+    # Status
+    if 'status' in request.GET:
+        status = request.GET['status']
+        if status:
+            listings = listings.filter(status__iexact=status)
 
     context = {
-        'listings': listings
+        'listings': listings,
+        'users': users,
+        'values': request.GET
     }
     return render(request, 'listings/logged_home.html', context)
 

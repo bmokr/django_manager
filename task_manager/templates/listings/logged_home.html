@@ -11,26 +11,28 @@
           <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam
             voluptatum tempore! Consectetur, id commodi!</p>
           <div class="search">
-            <form action="search.html">
+            <form action="{% url 'logged_home' %}">
               <!-- Form Row 1 -->
               <div class="form-row">
                 <div class="col-md-4 mb-3">
                   <label class="sr-only">Keywords</label>
-                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (coffee, cleaning, etc)">
+                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (coffee, cleaning, etc)"
+                  value="{{ values.keywords }}">
                 </div>
 
                 <div class="col-md-4 mb-3">
                   <label class="sr-only">User</label>
-                  <select name="state" class="form-control">
+                  <select name="user" class="form-control">
                     <option selected="true" disabled="disabled">User (All)</option>
-                    <option value="w1">worker1</option>
-                    <option value="w2">worker2</option>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
                   </select>
                 </div>
 
                 <div class="col-md-4 mb-3">
                   <label class="sr-only">Status</label>
-                  <select name="state" class="form-control">
+                  <select name="status" class="form-control">
                     <option selected="true" disabled="disabled">Status (All)</option>
                     <option value="new">New</option>
                     <option value="ongoing">Ongoing</option>
