@@ -74,4 +74,3 @@ def dashboard(request):
         return render(request, 'accounts/dashboard.html', {'listings': listings})
 
     return render(request, 'accounts/login.html')
-
