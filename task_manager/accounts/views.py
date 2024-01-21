@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
+from listings.models import Listing
 
 
 def register(request):
@@ -57,10 +58,20 @@ def login(request):
 
 
 def logout(request):
-    if request.method == 'POST':
-        auth.logout(request)
-    return redirect('index')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            auth.logout(request)
+        return redirect('index')
+
+    return render(request, 'accounts/login.html')
 
 
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    if request.user.is_authenticated:
+        user = request.user
+        print(user)
+        listings = Listing.objects.filter(user=user).order_by('-list_date')
+        return render(request, 'accounts/dashboard.html', {'listings': listings})
+
+    return render(request, 'accounts/login.html')
+

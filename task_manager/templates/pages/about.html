@@ -17,9 +17,12 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <!-- if login -->
-            <a href="{% url 'index' %}">
-              <i class="fas fa-home"></i> Home</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logged_home' %}">
+            {% else %}
+                <a href="{% url 'index' %}">
+            {% endif %}
+            <i class="fas fa-home"></i> Home</a>
           </li>
           <li class="breadcrumb-item active"> About</li>
         </ol>
