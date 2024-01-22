@@ -83,17 +83,20 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="{% url 'change_status' %}" method="POST">
+            {% csrf_token %}
+            <!--<input type="hidden" name="user_id" value="{{ user.id }}">-->
+            <input type="hidden" name="listing_id" value="{{ listing.id }}">
             <div class="form-group">
               <label for="property_name" class="col-form-label">Task:</label>
-              <input type="text" name="listing" class="form-control" value="{{ listing.title }}" disabled>
+              <input type="text" name="listing_id" class="form-control" value="{{ listing.id }}" disabled>
             </div>
             <div class="form-group">
                   <label class="sr-only">Status:</label>
-                  <select name="state" class="form-control">
-                    <option value="NEW" selected="true">New</option>
-                    <option value="ONG">Ongoing</option>
-                    <option value="FIN">Finished</option>
+                  <select name="status_id" class="form-control">
+                    <option value="new" selected="true">New</option>
+                    <option value="ongoing">Ongoing</option>
+                    <option value="finished">Finished</option>
                   </select>
             </div>
             <hr>

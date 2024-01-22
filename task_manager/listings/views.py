@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Listing
 from .utils import pair_iterable_for_delta_changes
 from operator import itemgetter
@@ -19,7 +19,6 @@ def logged_home(request):
     # User
     if 'user' in request.GET:
         user = request.GET['user']
-        print(user)
         if user:
             listings = listings.filter(user__exact=user)
 
@@ -41,7 +40,7 @@ def listing(request, listing_id):
     listing_s = get_object_or_404(Listing, pk=listing_id)
 
     context = {
-        'listing': listing_s
+        'listing': listing_s,
     }
 
     return render(request, 'listings/listing.html', context)
@@ -151,3 +150,52 @@ def history_view_acc(request, listing_id):
         'users': user_table,
     }
     return render(request, 'listings/history_view_acc.html', context)
+
+
+def change_status(request):
+    if request.method == 'POST':
+        listing_id = request.POST['listing_id']
+        status = request.POST['status_id']
+        # user_id = request.POST['user_id']
+
+        listing_s = Listing.objects.get(pk=listing_id)
+
+        listing_s.status = status
+        listing_s.save()
+
+        return redirect('history_view_acc', listing_id=listing_id)
+
+
+def delete_listing(request, listing_id):
+    listing_s = get_object_or_404(Listing, pk=listing_id)
+    listing_s.delete()
+    return redirect('logged_home')
+
+
+def add_new(request):
+    users = User.objects.all()
+    listing_s = Listing
+
+    context = {
+        'users': users,
+        'listing': listing_s,
+    }
+
+    return render(request, 'listings/add_new.html', context)
+
+
+def create_listing(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        description = request.POST['description']
+        status = request.POST['status']
+        user_id = request.POST['user']
+
+        Listing.objects.create(
+            title=title,
+            description=description,
+            status=status,
+            user_id=user_id
+        )
+
+        return redirect('logged_home')

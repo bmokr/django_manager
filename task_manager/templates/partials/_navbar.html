@@ -24,6 +24,19 @@
             {% endif %}
                 Home</a>
           </li>
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff %}
+                          <li
+                                  {% if 'add_new' in request.path %}
+                                  class="nav-item active mr-3"
+                                  {% else %}
+                                  class="nav-item mr-3"
+                                  {% endif %}
+                            >
+                          <a class="nav-link" href="{% url 'add_new' %}">Add Task</a>
+                          </li>
+                        {% endif %}
+                    {% endif %}
           <li
                   {% if 'about' in request.path %}
                   class="nav-item active mr-3"
