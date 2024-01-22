@@ -123,3 +123,32 @@ def create_listing(request):
         )
 
         return redirect('logged_home')
+
+
+def edit_listing_page(request, listing_id):
+    users = User.objects.all()
+    listing_s = get_object_or_404(Listing, pk=listing_id)
+
+    context = {
+        'users': users,
+        'listing': listing_s,
+    }
+    return render(request, 'listings/edit_listing.html', context)
+
+
+def edit(request):
+    if request.method == 'POST':
+        listing_id = request.POST['listing_id']
+        title = request.POST['title']
+        description = request.POST['description']
+        status = request.POST['status']
+        user_id = request.POST['user']
+
+        listing_s = Listing.objects.get(pk=listing_id)
+        listing_s.title = title
+        listing_s.description = description
+        listing_s.status = status
+        listing_s.user_id = user_id
+        listing_s.save()
+
+        return redirect('history_view_acc', listing_id=listing_id)

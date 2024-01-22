@@ -12,4 +12,6 @@ urlpatterns = [
     path('<int:listing_id>/delete_listing', views.delete_listing, name='delete_listing'),
     path('add_new', views.add_new, name='add_new'),
     path('create_listing', views.create_listing, name='create_listing'),
+    path('<int:listing_id>/edit_listing_page', views.edit_listing_page, name='edit_listing_page'),
+    path('edit', views.edit, name='edit'),
 ]

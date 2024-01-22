@@ -81,6 +81,7 @@
               <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
               {% if user.is_authenticated %}
                 {% if user.is_staff %}
+                  <a href="{% url 'edit_listing_page' listing.id %}" class="btn btn-primary btn-block">Edit</a>
                   <a href="{% url 'delete_listing' listing.id %}" class="btn btn-primary btn-block">Delete</a>
                 {% endif %}
               {% endif %}
