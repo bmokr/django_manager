@@ -69,7 +69,6 @@ def logout(request):
 def dashboard(request):
     if request.user.is_authenticated:
         user = request.user
-        print(user)
         listings = Listing.objects.filter(user=user).order_by('-list_date')
         return render(request, 'accounts/dashboard.html', {'listings': listings})
 
