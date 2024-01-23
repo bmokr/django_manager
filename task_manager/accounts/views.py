@@ -12,10 +12,10 @@ def register(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
-        password2 = request.POST['password2']
+        password_repeat = request.POST['password_repeat']
 
         # Validation
-        if password == password2:
+        if password == password_repeat:
             # Validate user name
             if User.objects.filter(username=username).exists():
                 messages.error(request, 'Username taken')
