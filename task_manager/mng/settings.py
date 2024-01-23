@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os.path
 from pathlib import Path
+from env import env_manager
+from setup import ENV_PATH
+
+# Initialization of variables
+env_manager.init(ENV_PATH)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!3!xi5c73=r7xg^7w8+qs8lp=bkklm*a%258#%xdzkvw*o#5mu'
+SECRET_KEY = env_manager.secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env_manager.debug == "True"
 
 ALLOWED_HOSTS = []
 
@@ -81,11 +86,11 @@ WSGI_APPLICATION = 'mng.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mngdb',
-        'USER': 'postgres',
-        'PASSWORD': 'watermelonIce',
-        'HOST': 'localhost'
+        'ENGINE': env_manager.engine,
+        'NAME': env_manager.name,
+        'USER': env_manager.user,
+        'PASSWORD': env_manager.password,
+        'HOST': env_manager.host
     }
 }
 
