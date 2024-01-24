@@ -2,7 +2,11 @@ FROM python:3.12
 
 WORKDIR /app
 
-RUN apk add --no-cache postgresql-dev
+RUN apt-get update && \
+    apt-get install -y libpq-dev
+
+COPY . /usr/src/app
+WORKDIR /usr/src/app
 
 COPY . /app
 

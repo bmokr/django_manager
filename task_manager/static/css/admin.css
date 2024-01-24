@@ -1,0 +1,39 @@
+:root {
+  --primary-background: #858585;
+  --text-color-light: #fff;
+  --text-color-dark: #333;
+  --accent-color: #30caa0;
+}
+
+#header {
+  height: 50px;
+  background: var(--primary-background);
+  color: var(--text-color-light);
+}
+
+#branding h1 {
+  color: var(--text-color-light);
+}
+
+a:link,
+a:visited {
+  color: var(--primary-background);
+}
+
+div.breadcrumbs {
+  background: var(--accent-color);
+  color: var(--primary-background);
+}
+
+div.breadcrumbs a {
+  color: var(--text-color-dark);
+}
+
+.module h2, .module caption, .inline-group h2 {
+  background: var(--accent-color);
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+  background: var(--primary-background);
+  color: var(--text-color-light);
+}

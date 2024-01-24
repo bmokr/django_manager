@@ -9,5 +9,14 @@ services:
       - .:/app
     depends_on:
       - db
-    env_file:
-      - .env.development
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=django-insecure-!3!xi5c73=r7xg^7w8+qs8lp=bkklm*a%258#%xdzkvw*o#5mu
+      - DATABASE_URL=postgres://postgres:watermelonIce@db:5432/mngdb
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: mngdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: watermelonIce
