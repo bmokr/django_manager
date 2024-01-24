@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os.path
 from pathlib import Path
-from env import env_manager
+from env_mng import env_manager
 from setup import ENV_PATH
 
 # Initialization of variables
@@ -31,7 +31,10 @@ SECRET_KEY = env_manager.secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env_manager.debug == "True"
 
-ALLOWED_HOSTS = []
+if not DEBUG:
+    ALLOWED_HOSTS = env_manager.allowed_hosts or []
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
